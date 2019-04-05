@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1554434306 source:/home/franco/Escritorio/ProgramacionI-2019/TP1/main.c
+	<stdio.h>
+	<stdlib.h>
+	"tp1.h"
+
+1554434364 /home/franco/Escritorio/ProgramacionI-2019/TP1/tp1.h
+
+1554240118 source:/home/franco/Escritorio/ProgramacionI-2019/TP1/tp1.c
+	<stdio.h>
+	<stdlib.h>
+	"tp1.h"
+
