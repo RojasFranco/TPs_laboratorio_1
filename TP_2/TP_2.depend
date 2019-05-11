@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1557535298 source:/home/franco/Escritorio/ProgramacionI-2019/TP_2/utn.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1557535298 /home/franco/Escritorio/ProgramacionI-2019/TP_2/utn.h
+
+1557540371 source:/home/franco/Escritorio/ProgramacionI-2019/TP_2/empleado.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"empleado.h"
+
+1557536380 /home/franco/Escritorio/ProgramacionI-2019/TP_2/empleado.h
+
+1557540938 source:/home/franco/Escritorio/ProgramacionI-2019/TP_2/main.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"empleado.h"
+
