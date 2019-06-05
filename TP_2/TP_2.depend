@@ -23,3 +23,38 @@
 	"utn.h"
 	"empleado.h"
 
+1559616689 source:/home/franco/Escritorio/tp_laboratorio_1/TP_2/empleado.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"empleado.h"
+
+1557535298 /home/franco/Escritorio/tp_laboratorio_1/TP_2/utn.h
+
+1557536380 /home/franco/Escritorio/tp_laboratorio_1/TP_2/empleado.h
+
+1559616614 source:/home/franco/Escritorio/tp_laboratorio_1/TP_2/main.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"empleado.h"
+	"informe.h"
+
+1557535298 source:/home/franco/Escritorio/tp_laboratorio_1/TP_2/utn.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1559616573 source:/home/franco/Escritorio/tp_laboratorio_1/TP_2/informe.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"empleado.h"
+	"informe.h"
+
+1559615101 /home/franco/Escritorio/tp_laboratorio_1/TP_2/informe.h
+

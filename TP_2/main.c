@@ -3,9 +3,10 @@
 #include <stdlib.h>
 #include "utn.h"
 #include "empleado.h"
+#include "informe.h"
 
 
-#define QTY_ARRAY_TIPO 10
+#define QTY_ARRAY_TIPO 1000
 #define SORT_UP 1
 #define SORT_DOWN 0
 
@@ -19,8 +20,9 @@ int main()
 
     do
     {
-        utn_getUnsignedInt("\n\n1) Alta Empleado \n2) Modificar Empleado \n3) Baja Empleado\n4) Listar \n5) Ordenar \n6) Salir\n",                   //cambiar
-                      "\nError",1,sizeof(int),1,11,1,&opcion);
+        utn_getUnsignedInt("\n\n1) Alta Empleado \n2) Modificar Empleado \n3) Baja Empleado\n"
+                           "4) Listar \n5) Ordenar \n6) Promedio Salarios\n7) Salir\n",
+                            "\nError",1,sizeof(int),1,11,1,&opcion);
         switch(opcion)
         {
             case 1: //Alta
@@ -40,15 +42,17 @@ int main()
                 break;
 
             case 5://Ordenar
-                empleado_ordenarPorDobleCriterio(arrayEmpleado,QTY_ARRAY_TIPO,SORT_UP,SORT_DOWN);                   //cambiar
+                informe_ordenarEmpleados(arrayEmpleado, QTY_ARRAY_TIPO);
                 break;
-
             case 6://Salir
+                informe_promedioSalarios(arrayEmpleado, QTY_ARRAY_TIPO);
+                break;
+            case 7:
                 break;
             default:
                 printf("\nOpcion no valida");
         }
     }
-    while(opcion!=6);
+    while(opcion!=7);
     return 0;
 }

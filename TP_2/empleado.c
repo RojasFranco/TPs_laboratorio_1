@@ -192,21 +192,27 @@ int empleado_baja(Empleado array[], int sizeArray)                              
     int id;
     if(array!=NULL && sizeArray>0)
     {
-        utn_getUnsignedInt("\nID a cancelar: ","\nError",1,sizeof(int),1,sizeArray,1,&id);          //cambiar si no se busca por ID
-        if(empleado_buscarID(array,sizeArray,id,&posicion)==-1)                                   //cambiar si no se busca por ID
+        if(!empleado_cantidadEmpleados(array, sizeArray))
         {
-            printf("\nNo existe este ID");                                                          //cambiar si no se busca por ID
+            empleado_listar(array, sizeArray);
+            utn_getUnsignedInt("\nID a cancelar: ","\nError",1,sizeof(int),1,sizeArray,1,&id);          //cambiar si no se busca por ID
+            if(empleado_buscarID(array,sizeArray,id,&posicion)==-1)                                   //cambiar si no se busca por ID
+            {
+                printf("\nNo existe este ID");                                                          //cambiar si no se busca por ID
+            }
+            else
+            {
+                array[posicion].isEmpty=1;
+                retorno=0;
+            }
+
+
         }
         else
         {
-            array[posicion].isEmpty=1;
-            array[posicion].idUnico=0;                                                                   //cambiar campo id
-            array[posicion].sector=0;                                                               //cambiar campo sector
-            array[posicion].salario=0;                                                             //cambiar campo salario
-            strcpy(array[posicion].nombre,"");                                                   //cambiar campo nombre
-            strcpy(array[posicion].apellido,"");                                               //cambiar campo apellido
-            retorno=0;
+            printf("\n No hay empleados \n");
         }
+
     }
     return retorno;
 }
@@ -260,39 +266,48 @@ int empleado_modificar(Empleado array[], int sizeArray)                         
     char opcion;
     if(array!=NULL && sizeArray>0)
     {
-        utn_getUnsignedInt("\nID a modificar: ","\nError",1,sizeof(int),1,sizeArray,1,&id);         //cambiar si no se busca por ID
-        if(empleado_buscarID(array,sizeArray,id,&posicion)==-1)                                   //cambiar si no se busca por ID
+        if(!empleado_cantidadEmpleados(array, sizeArray))
         {
-            printf("\nNo existe este ID");                                                          //cambiar si no se busca por ID
+            empleado_listar(array, sizeArray);
+            utn_getUnsignedInt("\nID a modificar: ","\nError",1,sizeof(int),1,sizeArray,1,&id);         //cambiar si no se busca por ID
+            if(empleado_buscarID(array,sizeArray,id,&posicion)==-1)                                   //cambiar si no se busca por ID
+            {
+                printf("\nNo existe este ID");                                                          //cambiar si no se busca por ID
+            }
+            else
+            {
+                do
+                {       //copiar printf de alta
+                    printf("\n Posicion: %d\n ID: %d\n sector: %d\n salario: %f\n nombre: %s\n apellido: %s",
+                           posicion, array[posicion].idUnico,array[posicion].sector,array[posicion].salario,array[posicion].nombre,array[posicion].apellido);
+                    utn_getChar("\nModificar: A-Sector \nB-Salario \nC\Nombre \nD-Apellido \nS(salir)\n","\nError",'A','Z',1,&opcion);
+                    switch(opcion)
+                    {
+                        case 'A':
+                            utn_getUnsignedInt("Nuevo sector: ","\nError",1,sizeof(int),1,1,1,&array[posicion].sector);           //mensaje + cambiar campo sector
+                            break;
+                        case 'B':
+                            utn_getFloat("Nuevo salario: ","\nError",1,sizeof(float),0,1,1,&array[posicion].salario);             //mensaje + cambiar campo salario
+                            break;
+                        case 'C':
+                            utn_getName("Nuevo nombre: ","\nError",1,TEXT_SIZE,1,array[posicion].nombre);                      //mensaje + cambiar campo nombre
+                            break;
+                        case 'D':
+                            utn_getName("Nuevo Apellido: ","\nError",1,TEXT_SIZE,1,array[posicion].apellido);             //mensaje + cambiar campo apellido
+                            break;
+                        case 'S':
+                            break;
+                        default:
+                            printf("\nOpcion no valida");
+                    }
+                }while(opcion!='S');
+                retorno=0;
+            }
+
         }
         else
         {
-            do
-            {       //copiar printf de alta
-                printf("\n Posicion: %d\n ID: %d\n sector: %d\n salario: %f\n nombre: %s\n apellido: %s",
-                       posicion, array[posicion].idUnico,array[posicion].sector,array[posicion].salario,array[posicion].nombre,array[posicion].apellido);
-                utn_getChar("\nModificar: A-Sector \nB-Salario \nC\Nombre \nD-Apellido \nS(salir)\n","\nError",'A','Z',1,&opcion);
-                switch(opcion)
-                {
-                    case 'A':
-                        utn_getUnsignedInt("Nuevo sector: ","\nError",1,sizeof(int),1,1,1,&array[posicion].sector);           //mensaje + cambiar campo sector
-                        break;
-                    case 'B':
-                        utn_getFloat("Nuevo salario: ","\nError",1,sizeof(float),0,1,1,&array[posicion].salario);             //mensaje + cambiar campo salario
-                        break;
-                    case 'C':
-                        utn_getName("Nuevo nombre: ","\nError",1,TEXT_SIZE,1,array[posicion].nombre);                      //mensaje + cambiar campo nombre
-                        break;
-                    case 'D':
-                        utn_getName("Nuevo Apellido: ","\nError",1,TEXT_SIZE,1,array[posicion].apellido);             //mensaje + cambiar campo apellido
-                        break;
-                    case 'S':
-                        break;
-                    default:
-                        printf("\nOpcion no valida");
-                }
-            }while(opcion!='S');
-            retorno=0;
+            printf("\n No hay empleados \n");
         }
     }
     return retorno;
@@ -363,18 +378,45 @@ int empleado_listar(Empleado array[], int size)                      //cambiar e
     int i;
     if(array!=NULL && size>=0)
     {
-        for(i=0;i<size;i++)
+        if(!empleado_cantidadEmpleados(array, size))
         {
-            if(array[i].isEmpty==1)
-                continue;
-            else
-                printf("\n ID: %d\n sector: %d\n salario: %f\n nombre: %s\n apellido: %s",
-                       array[i].idUnico,array[i].sector,array[i].salario,array[i].nombre,array[i].apellido);      //cambiar todos
+            for(i=0;i<size;i++)
+            {
+                if(array[i].isEmpty==1)
+                    continue;
+                else
+                    printf("\n ID: %d\n sector: %d\n salario: %f\n nombre: %s\n apellido: %s\n",
+                           array[i].idUnico,array[i].sector,array[i].salario,array[i].nombre,array[i].apellido);      //cambiar todos
+            }
+        }
+        else
+        {
+            printf("\n No hay empleados \n");
         }
         retorno=0;
     }
     return retorno;
 }
 
-
+int empleado_cantidadEmpleados(Empleado arrayEmpleado[], int len)
+{
+    int retorno=-1;
+    int i;
+    int cantidadEmpleados=0;
+    if(arrayEmpleado!=NULL && len>=0)
+    {
+        for(i=0; i<len; i++)
+        {
+            if(!arrayEmpleado[i].isEmpty)
+            {
+                cantidadEmpleados+=1;
+            }
+        }
+        if(cantidadEmpleados>=1)
+        {
+            retorno=0;
+        }
+    }
+    return retorno;
+}
 
